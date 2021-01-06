@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @method static paginate(int $int)
+ * @method static find($store)
+ */
 class Store extends Model
 {
     protected $fillable = ['name', 'description', 'phone', 'mobile_phone', 'slug'];

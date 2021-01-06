@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @method static find(mixed $user)
+ */
 class User extends Authenticatable
 {
     use Notifiable;
