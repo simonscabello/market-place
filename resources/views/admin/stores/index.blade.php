@@ -19,7 +19,7 @@
                         <a href="{{route('admin.stores.edit', ['store' => $store->id])}}" class="btn btn-sm btn-warning">Edit</a>
                         <form action="{{route('admin.stores.destroy', ['store' => $store->id])}}" method="post" class="d-inline">
                             @csrf @method('delete')
-                            <button type="submit" class="btn btn-sm btn-danger">Destroy</button>
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                         </form>
                     </td>
                 </tr>

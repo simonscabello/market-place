@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @method static paginate(int $int)
+ * @method static find($id)
+ */
 class Product extends Model
 {
     protected $fillable = ['name', 'description', 'body', 'price', 'slug'];
