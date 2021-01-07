@@ -3,17 +3,28 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRequest;
 use App\Store;
 use App\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Traits\UploadTrait;
+use Illuminate\Support\Facades\Storage;
 
 class StoreController extends Controller
 {
+    use UploadTrait;
+
+    public function __construct()
+    {
+        $this->middleware('user.has.store')->only(['create', 'store']);
+    }
+
     public function index()
     {
-        $stores = Store::paginate(10);
+        $store = auth()->user()->store;
 
-        return view('admin.stores.index', compact('stores'));
+        return view('admin.stores.index', compact('store'));
     }
 
     public function create()
@@ -23,11 +34,17 @@ class StoreController extends Controller
         return view('admin.stores.create', compact('users'));
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request): RedirectResponse
     {
         $data = $request->all();
-        $user = User::find($data['user']);
-        $store = $user->store()->create($data);
+
+        $logged_user = auth()->user();
+
+        if($request->hasFile('logo')){
+            $data['logo'] = $this->imageUpload($request->file('logo'));
+        }
+
+        $logged_user->store()->create($data);
 
         flash('Loja criada com sucesso.')->success();
 
@@ -41,11 +58,18 @@ class StoreController extends Controller
         return view('admin.stores.edit', compact('store'));
     }
 
-    public function update(Request $request, $store)
+    public function update(StoreRequest $request, $store)
     {
         $data = $request->all();
-
         $store = Store::find($store);
+
+        if($request->hasFile('logo')){
+            if(Storage::disk('public')->exists($store->logo)) {
+                Storage::disk('public')->delete($store->logo);
+            }
+            $data['logo'] = $this->imageUpload($request->file('logo'));
+        }
+
         $store->update($data);
 
         flash('Loja atualizada com sucesso.')->success();

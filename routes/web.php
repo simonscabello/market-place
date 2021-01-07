@@ -11,14 +11,17 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 
-Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
+Route::group(['middleware' => ['auth']], function(){
+    Route::prefix('admin')->name('admin.')->namespace('Admin')
+        ->group(function(){
 //    Route::prefix('stores')->name('stores.')->group(function(){
 //        Route::get('/', 'StoreController@index')->name('index');
 //        Route::get('/create', 'StoreController@create')->name('create');
@@ -27,7 +30,16 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
 //        Route::put('/update/{store}', 'StoreController@update')->name('update');;
 //        Route::delete('/destroy/{store}', 'StoreController@destroy')->name('destroy');;
 //    });
-    Route::resource('stores', 'StoreController');
-    Route::resource('products', 'ProductController');
+        Route::resource('stores', 'StoreController');
+        Route::resource('products', 'ProductController');
+        Route::resource('categories', 'CategoryController');
+
+        Route::post('photos/remove', 'ProductPhotoController@removePhoto')
+            ->name('photo.remove');
+    });
+
 });
 
+Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');

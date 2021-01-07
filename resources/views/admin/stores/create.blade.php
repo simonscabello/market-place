@@ -2,44 +2,66 @@
 
 @section('content')
 <h1>Criar Loja</h1>
-<form action="{{route('admin.stores.store')}}" method="post">
+<form action="{{route('admin.stores.store')}}" method="post" enctype="multipart/form-data">
     @csrf
 
     <div class="form-group">
-        <label>Nome Loja</label>
-        <input type="text" name="name" class="form-control">
+        <label>Nome</label>
+        <input value="{{old('name')}}" type="text" name="name" class="form-control @error('name') is-invalid @enderror">
+        @error('name')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+        @enderror
     </div>
 
     <div class="form-group">
         <label>Descrição</label>
-        <input type="text" name="description" class="form-control">
+        <input value="{{old('description')}}" type="text" name="description" class="form-control @error('description') is-invalid @enderror">
+        @error('description')
+        <div class="invalid-feedback">
+            {{$message}}
+        </div>
+        @enderror
     </div>
 
     <div class="form-group">
         <label>Telefone</label>
-        <input type="text" name="phone" class="form-control">
+        <input value="{{old('phone')}}" type="text" name="phone" class="form-control @error('phone') is-invalid @enderror">
+        @error('phone')
+        <div class="invalid-feedback">
+            {{$message}}
+        </div>
+        @enderror
     </div>
 
     <div class="form-group">
         <label>WhatsApp</label>
-        <input type="text" name="mobile_phone" class="form-control">
+        <input value="{{old('mobile_phone')}}" type="text" name="mobile_phone" class="form-control @error('mobile_phone') is-invalid @enderror">
+        @error('mobile_phone')
+        <div class="invalid-feedback">
+            {{$message}}
+        </div>
+        @enderror
+    </div>
+
+    <div class="div-form-group">
+        <label>Logo loja</label>
+        <input type="file" name="logo" class="form-control-file @error('logo') is-invalid @enderror">
+        @error('logo')
+        <div class="invalid-feedback">
+            {{$message}}
+        </div>
+        @enderror
     </div>
 
     <div class="form-group">
         <label>Slug</label>
-        <input type="text" name="slug" class="form-control">
+        <input value="{{old('slug')}}" type="text" name="slug" class="form-control">
     </div>
 
-    <div class="form-group">
-        <label>Usuário</label>
-        <select name="user" class="form-control">
-            @foreach($users as $user)
-                <option value="{{$user->id}}">{{$user->name}}</option>
-            @endforeach
-        </select>
-    </div>
     <div>
-        <button type="submit" class="btn btn-success">Criar Loja</button>
+        <button type="submit" class="btn btn-dark">Confirmar criação</button>
     </div>
 </form>
 @endsection

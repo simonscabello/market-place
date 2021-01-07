@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Store extends Model
 {
-    protected $fillable = ['name', 'description', 'phone', 'mobile_phone', 'slug'];
+    protected $fillable = ['name', 'description', 'phone', 'mobile_phone', 'slug', 'logo'];
 
     public function user(): BelongsTo
     {
@@ -22,5 +22,10 @@ class Store extends Model
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function categories(): HasMany
+    {
+        return $this->hasMany(Category::class);
     }
 }
