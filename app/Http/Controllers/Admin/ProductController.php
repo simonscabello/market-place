@@ -38,10 +38,12 @@ class ProductController extends Controller
     {
         $data = $request->all();
 
+        $categories = $request->get('categories', null);
+
         $store = auth()->user()->store;
 
         $product = $store->products()->create($data);
-        $product->categories()->attach($data['categories']);
+        $product->categories()->attach($categories);
 
         if($request->hasFile('photos')){
             $images = $this->imageUpload($request->file('photos'), 'image');
@@ -71,9 +73,14 @@ class ProductController extends Controller
     {
         $data = $request->all();
 
+        $categories = $request->get('categories', null);
+
         $product = Product::find($id);
         $product->update($data);
-        $product->categories()->attach($data['categories']);
+
+        if($categories){
+            $product->categories()->attach($categories);
+        }
 
         if($request->hasFile('photos')){
             $images = $this->imageUpload($request->file('photos'), 'image');
@@ -90,7 +97,6 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->photos()->delete();
         $product->categories()->detach();
-
         $product->delete();
 
         flash('Produto removido com sucesso.')->success();

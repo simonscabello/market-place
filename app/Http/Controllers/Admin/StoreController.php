@@ -17,7 +17,8 @@ class StoreController extends Controller
 
     public function __construct()
     {
-        $this->middleware('user.has.store')->only(['create', 'store']);
+        $this->middleware('user.has.store')->only('create');
+//        $this->middleware('password.confirm')->only('store');
     }
 
     public function index()

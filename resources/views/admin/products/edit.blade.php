@@ -52,6 +52,7 @@
         </div>
 
         <div class="form-group">
+
             <label>Categorias</label>
             <select name="categories[]" id="" class="form-control" multiple required>
                 @foreach($categories as $category)
@@ -65,7 +66,7 @@
         <div class="div-form-group">
             <label>Fotos do produto</label>
             <input type="file" name="photos[]"
-                   class="form-control-file @error('photos') is-invalid @enderror"
+                   class="form-control-file mb-5 @error('photos.*') is-invalid @enderror"
                    multiple required>
             @error('photos')
             <div class="invalid-feedback">
@@ -74,13 +75,8 @@
             @enderror
         </div>
 
-        <div class="form-group">
-            <label>Slug</label>
-            <input type="text" name="slug" class="form-control" value="{{$product->slug}}">
-        </div>
-
         <div>
-            <button type="submit" class="btn btn-lg btn-dark">Atualizar Produto</button>
+            <button type="submit" class="btn btn-lg btn-dark mb-4 mt-4">Atualizar Produto</button>
         </div>
     </form>
 

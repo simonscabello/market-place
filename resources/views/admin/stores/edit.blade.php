@@ -59,11 +59,6 @@
         @enderror
     </div>
 
-    <div class="form-group">
-        <label>Slug</label>
-        <input value="{{$store->slug}}" type="text" name="slug" class="form-control">
-    </div>
-
     <div>
         <button type="submit" class="btn btn-dark">Confirmar Edição</button>
     </div>
