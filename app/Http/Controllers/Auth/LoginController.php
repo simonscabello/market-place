@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -27,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/stores';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -47,6 +48,15 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return $this->loggedOut($request) ?: redirect('/login');
+        return $this->loggedOut($request) ?: redirect('/');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if(session()->has('cart')){
+            return redirect()->route('checkout.index');
+        }
+
+        return null;
     }
 }

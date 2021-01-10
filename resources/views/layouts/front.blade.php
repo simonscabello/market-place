@@ -19,6 +19,7 @@
             margin-bottom: 40px;
         }
     </style>
+    @yield('stylesheets')
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 40px;">
@@ -36,18 +37,18 @@
             </li>
         </ul>
 
-        @auth
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item @if(request()->is('admin/stores*')) active @endif">
-                    <a class="nav-link" href="{{route('admin.stores.index')}}">Lojas <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item @if(request()->is('admin/products*')) active @endif">
-                    <a class="nav-link" href="{{route('admin.products.index')}}">Produtos</a>
-                </li>
-                <li class="nav-item @if(request()->is('admin/categories*')) active @endif">
-                    <a class="nav-link" href="{{route('admin.categories.index')}}">Categorias</a>
-                </li>
-            </ul>
+
+{{--            <ul class="navbar-nav mr-auto">--}}
+{{--                <li class="nav-item @if(request()->is('admin/stores*')) active @endif">--}}
+{{--                    <a class="nav-link" href="{{route('admin.stores.index')}}">Lojas <span class="sr-only">(current)</span></a>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item @if(request()->is('admin/products*')) active @endif">--}}
+{{--                    <a class="nav-link" href="{{route('admin.products.index')}}">Produtos</a>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item @if(request()->is('admin/categories*')) active @endif">--}}
+{{--                    <a class="nav-link" href="{{route('admin.categories.index')}}">Categorias</a>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
 
             <div class="my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto">
@@ -74,7 +75,7 @@
 {{--                    </div>--}}
                 </ul>
             </div>
-        @endauth
+
 
     </div>
 </nav>
@@ -83,5 +84,6 @@
     @include('flash::message')
     @yield('content')
 </div>
+@yield('scripts')
 </body>
 </html>

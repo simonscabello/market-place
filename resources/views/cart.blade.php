@@ -43,7 +43,7 @@
                 </table>
                 <hr>
                 <div class="col-md-12">
-                    <a href="#" class="btn btn-success ml-3 float-right">Concluir Compra</a>
+                    <a href="{{route('checkout.index')}}" class="btn btn-success ml-3 float-right">Concluir Compra</a>
                     <a href="{{route('cart.cancel')}}" class="btn btn-danger float-right">Cancelar Compra</a>
                 </div>
             @else
