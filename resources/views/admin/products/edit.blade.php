@@ -55,10 +55,10 @@
 
             <label>Categorias</label>
             <select name="categories[]" id="" class="form-control" multiple required>
-                @foreach($categories as $category)
-                    <option value="{{$category->id}}"
-                        @if($product->categories->contains($category)) selected @endif
-                    >{{$category->name}}</option>
+                @foreach($category as $c)
+                    <option value="{{$c->id}}"
+                        @if($product->categories->contains($c)) selected @endif
+                    >{{$c->name}}</option>
                 @endforeach
             </select>
         </div>
@@ -67,7 +67,7 @@
             <label>Fotos do produto</label>
             <input type="file" name="photos[]"
                    class="form-control-file mb-5 @error('photos.*') is-invalid @enderror"
-                   multiple required>
+                   multiple>
             @error('photos')
             <div class="invalid-feedback">
                 {{$message}}

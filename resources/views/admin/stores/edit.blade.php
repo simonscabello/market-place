@@ -51,7 +51,7 @@
             <img src="{{asset('storage/' . $store->logo)}}" alt="#">
         </p>
         <label>Logo loja</label>
-        <input type="file" name="logo" class="form-control-file @error('logo') is-invalid @enderror">
+        <input type="file" name="logo" class="form-control-file mb-5 @error('logo') is-invalid @enderror">
         @error('logo')
             <div class="invalid-feedback">
                 {{$message}}

@@ -29,9 +29,10 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = auth()->user()->store->categories;
+//        $category = Category::all();
+        $category = auth()->user()->store->categories;
 
-        return view('admin.products.create', compact('categories'));
+        return view('admin.products.create', compact('category'));
     }
 
     public function store(ProductRequest $request): RedirectResponse
@@ -63,10 +64,10 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        $categories = Category::all(['id', 'name']);
+        $category = Category::all(['id', 'name']);
 
 
-        return view('admin.products.edit', compact('product', 'categories'));
+        return view('admin.products.edit', compact('product', 'category'));
     }
 
     public function update(ProductRequest $request, $id): RedirectResponse

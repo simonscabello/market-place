@@ -12,6 +12,8 @@ use Spatie\Sluggable\SlugOptions;
  * @method static create(array $data)
  * @method static findOrFail($category)
  * @method static find($category)
+ * @method static whereSlug($slug)
+ * @method static limit()
  */
 class Category extends Model
 {

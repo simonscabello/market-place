@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <a href="{{route('admin.categories.create')}}" class="btn btn-lg btn-success">Criar Categoria</a>
+    <a href="{{route('admin.categories.create')}}" class="btn btn-lg btn-success mb-5">Nova Categoria</a>
 
     <table class="table table-striped">
         <thead>
@@ -13,15 +13,24 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($categories as $category)
+        @foreach($category as $c)
             <tr>
-                <td>{{$category->id}}</td>
-                <td>{{$category->name}}</td>
+                <td>{{$c->id}}</td>
+                <td>{{$c->name}}</td>
                 <td>
-                        <a href="{{route('admin.categories.edit', ['category' => $category->id])}}" class="btn btn-sm btn-warning">Edit</a>
-                        <form action="{{route('admin.categories.destroy', ['category' => $category->id])}}" method="post" class="d-inline">
+                        <a href="{{route('admin.categories.edit', ['category' => $c->id])}}" class="btn btn-sm btn-warning">Edit</a>
+                        <form action="{{route('admin.categories.destroy', ['category' => $c->id])}}" method="post" class="d-inline">
                             @csrf @method("DELETE")
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            @if($c->products->count())
+                                <button type="submit"
+                                        class="btn btn-sm btn-danger"
+                                        title="Categorias com produtos cadastrados não podem ser excluidas."
+                                        disabled>
+                                    Delete
+                                </button>
+                            @else
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            @endif
                         </form>
                 </td>
             </tr>

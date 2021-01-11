@@ -44,7 +44,7 @@
                 <hr>
                 <div class="col-md-12">
                     <a href="{{route('checkout.index')}}" class="btn btn-success ml-3 float-right">Concluir Compra</a>
-                    <a href="{{route('cart.cancel')}}" class="btn btn-danger float-right">Cancelar Compra</a>
+                    <a href="{{route('cart.cancel')}}" class="btn btn-danger float-left">Cancelar Compra</a>
                 </div>
             @else
                 <div class="alert alert-warning">Seu carrinho está vazio.</div>

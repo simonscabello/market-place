@@ -24,7 +24,7 @@
         </div>
 
         <div>
-            <button type="submit" class="btn btn-lg btn-success">Atualizar Categoria</button>
+            <button type="submit" class="btn btn-lg btn-success mb-5">Atualizar Categoria</button>
         </div>
     </form>
 @endsection

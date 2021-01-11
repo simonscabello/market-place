@@ -2,6 +2,7 @@
 
 @section('content')
     <h1>Criar Produto</h1>
+    <hr>
     <form action="{{route('admin.products.store')}}" method="post" enctype="multipart/form-data">
         @csrf
 
@@ -53,15 +54,15 @@
         <div class="form-group">
             <label>Categorias</label>
             <select name="categories[]" id="" class="form-control" multiple required>
-                @foreach($categories as $category)
-                    <option value="{{$category->id}}">{{$category->name}}</option>
+                @foreach($category as $c)
+                    <option value="{{$c->id}}">{{$c->name}}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="div-form-group">
             <label>Fotos do produto</label>
-            <input type="file" name="photos[]" class="form-control-file @error('photos.*') is-invalid @enderror" multiple>
+            <input type="file" name="photos[]" class="form-control-file mb-5 @error('photos.*') is-invalid @enderror" multiple>
             @error('photos')
             <div class="invalid-feedback">
                 {{$message}}
@@ -70,7 +71,7 @@
         </div>
 
         <div>
-            <button type="submit" class="btn btn-lg btn-dark">Criar Produto</button>
+            <button type="submit" class="btn btn-lg btn-dark mb-5">Criar Produto</button>
         </div>
     </form>
 @endsection

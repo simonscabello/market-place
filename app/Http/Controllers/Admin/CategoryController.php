@@ -14,9 +14,9 @@ class CategoryController extends Controller
     public function index()
     {
         $userStore = auth()->user()->store;
-        $categories = $userStore->categories()->paginate(10);
+        $category = $userStore->categories()->paginate(10);
 
-        return view('admin.categories.index', compact('categories'));
+        return view('admin.categories.index', compact('category'));
     }
 
     public function create()
@@ -32,7 +32,7 @@ class CategoryController extends Controller
 
         $store->categories()->create($data);
 
-        flash('Categoria Criado com Sucesso!')->success();
+        flash('Categoria Criada com Sucesso!')->success();
 
         return redirect()->route('admin.categories.index');
     }
