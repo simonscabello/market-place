@@ -67,6 +67,11 @@
 
             <div class="my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto">
+                        @auth
+                        <li class="nav-item @if(request()->is('my-orders')) active @endif">
+                            <a href="{{route('user.orders')}}" class="nav-link">Meus pedidos</a>
+                        </li>
+                        @endauth
                     <a class="nav-link" href="{{route('cart.index')}}">
                         @if(session()->has('cart'))
                             <span class="badge badge-danger">{{array_sum(array_column(session()->get('cart'), 'amount'))}}</span>
