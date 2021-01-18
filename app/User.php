@@ -51,4 +51,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserOrder::class);
     }
+
+//    public function routeNotificationForNexmo($notification)
+//    {
+//       $storeNumber = trim(str_replace(['(', ')', ' ', '-'], '', $this->store->mobile_phone));
+///       return '55' . $storeNumber;
+//
+//        return '5527998217807';
+//    }
 }

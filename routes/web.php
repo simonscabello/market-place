@@ -11,6 +11,7 @@
 |
 */
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -40,22 +41,19 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::prefix('admin')->name('admin.')->namespace('Admin')
         ->group(function(){
-//    Route::prefix('stores')->name('stores.')->group(function(){
-//        Route::get('/', 'StoreController@index')->name('index');
-//        Route::get('/create', 'StoreController@create')->name('create');
-//        Route::post('/store', 'StoreController@store')->name('store');;
-//        Route::get('/{store}/edit', 'StoreController@edit')->name('edit');;
-//        Route::put('/update/{store}', 'StoreController@update')->name('update');;
-//        Route::delete('/destroy/{store}', 'StoreController@destroy')->name('destroy');;
-//    });
-        Route::resource('stores', 'StoreController');
-        Route::resource('products', 'ProductController');
-        Route::resource('categories', 'CategoryController');
+            Route::get('notifications','NotificationController@notifications')->name('notifications.index');
+            Route::get('notifications/read-all','NotificationController@readAll')->name('notifications.read.all');
+            Route::get('notifications/read/{notification}','NotificationController@read')->name('notifications.read');
 
-        Route::post('photos/remove', 'ProductPhotoController@removePhoto')
-            ->name('photo.remove');
 
-        Route::get('orders/my', 'OrdersController@index')->name('orders.my');
+            Route::resource('stores', 'StoreController');
+            Route::resource('products', 'ProductController');
+            Route::resource('categories', 'CategoryController');
+
+            Route::post('photos/remove', 'ProductPhotoController@removePhoto')
+                ->name('photo.remove');
+
+            Route::get('orders/my', 'OrdersController@index')->name('orders.my');
     });
 
 });

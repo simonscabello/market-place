@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\StoreReceiveNewOrder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -14,6 +15,7 @@ use Spatie\Sluggable\SlugOptions;
  * @method static find($store)
  * @method static limit(int $int)
  * @method static whereSlug($slug)
+ * @method static whereIn(string $string, $stores)
  */
 class Store extends Model
 {
@@ -50,5 +52,14 @@ class Store extends Model
             'order_store',
             'store_id',
             'order_id');
+    }
+
+    public function notifyStoresOwners(array $storesId = [])
+    {
+        $stores = Store::whereIn('id', $storesId)->get();
+
+        $stores->map(function($store){
+            return $store->user;
+        })->each->notify(new StoreReceiveNewOrder());
     }
 }

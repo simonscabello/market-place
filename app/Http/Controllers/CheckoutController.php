@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Payment\PagSeguro\CreditCard;
+use App\Store;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -50,6 +51,8 @@ class CheckoutController extends Controller
 
             $userOrder = $user->orders()->create($userOrder);
             $userOrder->stores()->sync($stores);
+
+            $store = (new Store())->notifyStoresOwners($stores);
 
             session()->forget('cart');
             session()->forget('pagseguro_session_code');
