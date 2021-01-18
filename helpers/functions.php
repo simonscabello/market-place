@@ -7,3 +7,8 @@ function filterItemsByStoreId(array $items, $storeId)
         return $line['store_id'] == $storeId;
     });
 }
+
+function formatPriceToDatabase($price)
+{
+    return srt_replace(['.', ','], ['', '.'], $price);
+}

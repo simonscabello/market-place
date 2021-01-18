@@ -27,7 +27,7 @@
 
     <div class="form-group">
         <label>Telefone</label>
-        <input value="{{old('phone')}}" type="text" name="phone" class="form-control @error('phone') is-invalid @enderror">
+        <input value="{{old('phone')}}" type="text" id="phone" name="phone" class="form-control @error('phone') is-invalid @enderror">
         @error('phone')
         <div class="invalid-feedback">
             {{$message}}
@@ -37,7 +37,7 @@
 
     <div class="form-group">
         <label>WhatsApp</label>
-        <input value="{{old('mobile_phone')}}" type="text" name="mobile_phone" class="form-control @error('mobile_phone') is-invalid @enderror">
+        <input value="{{old('mobile_phone')}}" type="text" id="mobile_phone" name="mobile_phone" class="form-control @error('mobile_phone') is-invalid @enderror">
         @error('mobile_phone')
         <div class="invalid-feedback">
             {{$message}}
@@ -59,4 +59,22 @@
         <button type="submit" class="btn btn-dark">Criar Loja</button>
     </div>
 </form>
+@endsection
+
+@section('scripts');
+
+<script>
+    // let imPhone = new Inputmask('(99) 9999-9999');
+    // imPhone.mask(document.getElementById('phone'));
+    //
+    // let imMobilePhone = new Inputmask('(99) 99999-9999');
+    // imMobilePhone.mask(document.getElementById('mobile_phone'));
+    //
+    // $(document).ready(function(){
+    //     $('#phone').inputmask("(99) 9999-9999");
+    //     $('#mobile_phone').inputmask("(99) 99999-9999");
+    // });
+
+</script>
+
 @endsection

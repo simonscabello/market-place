@@ -20,8 +20,12 @@ class CartController extends Controller
 
         $product = Product::whereSlug($productData['slug']);
 
-        if(!$product->count())
+        if(!$product->count() || $productData['amount'] <= 0) {
+            flash('Erro na quantidade de itens no carrinho.
+                           Verifique e tente novamente.')->warning();
+
             return redirect()->route('home');
+        }
 
         $product = $product->first(['name', 'price', 'store_id'])->toArray();
 

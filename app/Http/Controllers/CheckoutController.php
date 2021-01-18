@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Payment\PagSeguro\CreditCard;
+use App\Payment\PagSeguro\Notification;
 use App\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CheckoutController extends Controller
 {
@@ -36,7 +38,7 @@ class CheckoutController extends Controller
             $user = auth()->user();
             $cartItems = session()->get('cart');
             $stores = array_unique(array_column($cartItems, 'store_id'));
-            $reference = 'XPTO';
+            $reference = Str::random(20);
 
             $creditCardPayment = new CreditCard($cartItems, $user, $dataPost, $reference);
             $result = $creditCardPayment->doPayment();
@@ -45,8 +47,7 @@ class CheckoutController extends Controller
                 'reference' => $reference,
                 'pagseguro_code' => $result->getCode(),
                 'pagseguro_status' => $result->getStatus(),
-                'items' => serialize($cartItems),
-                'store_id' => 1
+                'items' => serialize($cartItems)
             ];
 
             $userOrder = $user->orders()->create($userOrder);
@@ -78,6 +79,13 @@ class CheckoutController extends Controller
     public function thanks()
     {
         return view('thanks');
+    }
+
+    public function notification()
+    {
+        $notification = new Notification();
+
+        var_dump($notification->getTransaction());
     }
 
     private function makePagSeguroSession()
