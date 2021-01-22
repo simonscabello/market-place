@@ -80,14 +80,16 @@ class ProductController extends Controller
     public function update(ProductRequest $request, $id): RedirectResponse
     {
         $data = $request->all();
+        $data['price'] = formatPriceToDatabase($data['price']);
 
         $categories = $request->get('categories', null);
+
 
         $product = Product::find($id);
         $product->update($data);
 
         if($categories){
-            $product->categories()->attach($categories);
+            $product->categories()->sync($categories);
         }
 
         if($request->hasFile('photos')){
