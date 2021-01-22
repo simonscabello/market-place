@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-6">
+        <div class="col-6 text-center">
            @if($product->photos->count())
                 <img src="{{asset('storage/' . $product->photos->first()->image)}}" alt="" class="card-img-top">
                 <div class="row" style="margin-top: 20px">

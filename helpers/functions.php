@@ -10,5 +10,5 @@ function filterItemsByStoreId(array $items, $storeId)
 
 function formatPriceToDatabase($price)
 {
-    return srt_replace(['.', ','], ['', '.'], $price);
+    return str_replace(['.', ','], ['', '.'], $price);
 }

@@ -13,8 +13,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $userStore = auth()->user()->store;
-        $category = $userStore->categories()->paginate(10);
+        $category = Category::all();
 
         return view('admin.categories.index', compact('category'));
     }

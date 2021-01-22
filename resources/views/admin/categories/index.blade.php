@@ -18,20 +18,24 @@
                 <td>{{$c->id}}</td>
                 <td>{{$c->name}}</td>
                 <td>
-                        <a href="{{route('admin.categories.edit', ['category' => $c->id])}}" class="btn btn-sm btn-warning">Edit</a>
+                        @if(auth()->user()->role == 'ROLE_ADMIN')
+                        <a href="{{route('admin.categories.edit', ['category' => $c->id])}}" class="btn btn-sm btn-secondary">Edit</a>
                         <form action="{{route('admin.categories.destroy', ['category' => $c->id])}}" method="post" class="d-inline">
                             @csrf @method("DELETE")
                             @if($c->products->count())
                                 <button type="submit"
-                                        class="btn btn-sm btn-danger"
+                                        class="btn btn-sm btn-dark"
                                         title="Categorias com produtos cadastrados não podem ser excluidas."
                                         disabled>
                                     Delete
                                 </button>
                             @else
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-sm btn-dark">Delete</button>
                             @endif
                         </form>
+                        @else
+                            Somente o Admin pode editar e excluir categorias.
+                        @endif
                 </td>
             </tr>
         @endforeach

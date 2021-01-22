@@ -20,11 +20,6 @@
         body{
             background-color: #f5f5f5;
         }
-
-        img{
-            max-width: 180px;
-            height: auto;
-        }
     </style>
     @yield('stylesheets')
 </head>
@@ -39,16 +34,33 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item @if(request()->is('/')) active @endif">
-                <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
-            </li>
+{{--            <li class="nav-item @if(request()->is('/')) active @endif">--}}
+{{--                <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>--}}
+{{--            </li>--}}
 
+            <div class="dropdown ml-2">
+                <a class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categorias
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @foreach($categories as $category)
+                        <a class="dropdown-item" href="{{route('category.single', ['slug' => $category->slug])}}">{{$category->name}}</a>
+                    @endforeach
+                </div>
+            </div>
 
-            @foreach($categories as $category)
-                <li class="nav-item @if(request()->is('category/' . $category->slug)) active @endif">
-                    <a class="nav-link" href="{{route('category.single', ['slug' => $category->slug])}}">{{$category->name}}</a>
-                </li>
-            @endforeach
+{{--            @if($stores->count())--}}
+{{--            <div class="dropdown ml-2">--}}
+{{--                <a class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                    Lojas Parceiras--}}
+{{--                </a>--}}
+{{--                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
+{{--                    @foreach($stores as $store)--}}
+{{--                        <a href="{{route('store.single', ['slug' => $store->slug])}}" class="dropdown-item">{{$store->name}}</a>--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            @endif--}}
         </ul>
             <div class="my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto">
@@ -73,6 +85,8 @@
                                     @method('post')
                                 </form>
                                     <a href="{{route('user.orders')}}" class="dropdown-item">Meus pedidos</a>
+                                    <a href="{{route('admin.stores.index')}}" class="dropdown-item">Minha loja</a>
+
                             </div>
                         @endauth
 

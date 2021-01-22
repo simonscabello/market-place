@@ -4,7 +4,7 @@
     @if(!$store)
         <a href="{{route('admin.stores.create')}}" class="btn btn-lg btn-success mb-5">Nova Loja</a>
     @else
-    <table class="table table-striped">
+    <table class="table">
     <thead>
         <tr>
             <th>#</th>
@@ -19,10 +19,10 @@
                 <td>{{$store->name}}</td>
                 <td>{{$store->products->count()}}</td>
                 <td>
-                    <a href="{{route('admin.stores.edit', ['store' => $store->id])}}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{{route('admin.stores.edit', ['store' => $store->id])}}" class="btn btn-sm btn-secondary">Editar</a>
                     <form action="{{route('admin.stores.destroy', ['store' => $store->id])}}" method="post" class="d-inline">
                         @csrf @method('delete')
-                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-sm btn-dark">Excluir</button>
                     </form>
                 </td>
             </tr>

@@ -40,10 +40,10 @@ class Store extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function categories(): HasMany
-    {
-        return $this->hasMany(Category::class);
-    }
+//    public function categories(): HasMany
+//    {
+//        return $this->hasMany(Category::class);
+//    }
 
     public function orders(): BelongsToMany
     {

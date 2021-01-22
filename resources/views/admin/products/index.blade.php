@@ -20,10 +20,10 @@
                     <td>R$ {{number_format($p->price, 2, ',', '.')}}</td>
                     <td>{{$p->store->name}}</td>
                     <td>
-                        <a href="{{route('admin.products.edit', ['product' => $p->id])}}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{{route('admin.products.edit', ['product' => $p->id])}}" class="btn btn-sm btn-secondary">Edit</a>
                         <form action="{{route('admin.products.destroy', ['product' => $p->id])}}" method="post" class="d-inline">
                             @csrf @method('delete')
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-sm btn-dark">Delete</button>
                         </form>
                     </td>
                 </tr>

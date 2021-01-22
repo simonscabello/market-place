@@ -35,8 +35,7 @@ class ProductController extends Controller
 
     public function create()
     {
-//        $category = Category::all();
-        $category = auth()->user()->store->categories;
+        $category = Category::all();
 
         return view('admin.products.create', compact('category'));
     }
