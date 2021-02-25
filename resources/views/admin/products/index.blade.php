@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(auth()->user()->role == 'ROLE_OWNER')
     <a href="{{route('admin.products.create')}}" class="btn btn-lg btn-success mb-5">Novo Produto</a>
+    @endif
     <table class="table table-striped">
         <thead>
             <tr>
@@ -31,5 +33,5 @@
         </tbody>
     </table>
 
-{{$products->links()}}
+{{--{{$products->links()}}--}}
 @endsection

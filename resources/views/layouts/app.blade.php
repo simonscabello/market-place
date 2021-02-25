@@ -27,19 +27,30 @@
             </ul>
             @auth
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item @if(request()->is('admin/orders*')) active @endif">
-                    <a class="nav-link" href="{{route('admin.orders.my')}}">Meus Pedidos</a>
-                </li>
-                <li class="nav-item @if(request()->is('admin/stores*')) active @endif">
-                    <a class="nav-link" href="{{route('admin.stores.index')}}">Loja<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item @if(request()->is('admin/products*')) active @endif">
-                    <a class="nav-link" href="{{route('admin.products.index')}}">Produtos</a>
-                </li>
-                @if(auth()->user()->role == 'ROLE_OWNER' || auth()->user()->role == 'ROLE_ADMIN')
-                <li class="nav-item @if(request()->is('admin/categories*')) active @endif">
-                    <a class="nav-link" href="{{route('admin.categories.index')}}">Categorias</a>
-                </li>
+                @if(auth()->user()->role == 'ROLE_OWNER')
+                    <li class="nav-item @if(request()->is('admin/orders*')) active @endif">
+                        <a class="nav-link" href="{{route('admin.orders.my')}}">Meus Pedidos</a>
+                    </li>
+                    <li class="nav-item @if(request()->is('admin/stores*')) active @endif">
+                        <a class="nav-link" href="{{route('admin.stores.index')}}">Loja<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item @if(request()->is('admin/products*')) active @endif">
+                        <a class="nav-link" href="{{route('admin.products.index')}}">Produtos</a>
+                    </li>
+                    <li class="nav-item @if(request()->is('admin/categories*')) active @endif">
+                        <a class="nav-link" href="{{route('admin.categories.index')}}">Categorias</a>
+                    </li>
+                @endif
+                @if(auth()->user()->role == 'ROLE_ADMIN')
+                    <li class="nav-item @if(request()->is('admin/owners*')) active @endif">
+                        <a class="nav-link" href="{{route('admin.owners.index')}}">Lojistas</a>
+                    </li>
+                    <li class="nav-item @if(request()->is('admin/products*')) active @endif">
+                        <a class="nav-link" href="{{route('admin.all-products.index')}}">Todos os produtos</a>
+                    </li>
+                    <li class="nav-item @if(request()->is('admin/categories*')) active @endif">
+                        <a class="nav-link" href="{{route('admin.categories.index')}}">Categorias</a>
+                    </li>
                 @endif
             </ul>
 

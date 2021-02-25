@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * @method static find(mixed $user)
+ * @method static create(array $all)
  */
 class User extends Authenticatable
 {

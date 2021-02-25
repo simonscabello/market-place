@@ -14,6 +14,7 @@ use Spatie\Sluggable\SlugOptions;
  * @method static find($id)
  * @method static limit(int $int)
  * @method whereSlug($slug)
+ * @method orderBy(string $string, string $string1)
  */
 class Product extends Model
 {

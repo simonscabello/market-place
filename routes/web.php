@@ -52,11 +52,14 @@ Route::group(['middleware' => ['auth', 'access.control.store.admin']], function(
             Route::resource('stores', 'StoreController');
             Route::resource('products', 'ProductController');
             Route::resource('categories', 'CategoryController');
+            Route::resource('owners', 'OwnerController');
 
             Route::post('photos/remove', 'ProductPhotoController@removePhoto')
                 ->name('photo.remove');
 
             Route::get('orders/my', 'OrdersController@index')->name('orders.my');
+
+            Route::get('/all-products', 'SuperAdminProductController@index')->name('all-products.index');
     });
 
 });

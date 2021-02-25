@@ -34,9 +34,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
         <ul class="navbar-nav mr-auto">
-{{--            <li class="nav-item @if(request()->is('/')) active @endif">--}}
-{{--                <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>--}}
-{{--            </li>--}}
 
             <div class="dropdown ml-2">
                 <a class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -84,9 +81,13 @@
                                     @csrf
                                     @method('post')
                                 </form>
+                                @if(auth()->user()->role == 'ROLE_OWNER')
                                     <a href="{{route('user.orders')}}" class="dropdown-item">Meus pedidos</a>
                                     <a href="{{route('admin.stores.index')}}" class="dropdown-item">Minha loja</a>
-
+                                @endif
+                                @if(auth()->user()->role == 'ROLE_ADMIN')
+                                <a class="dropdown-item" href="{{route('admin.stores.index')}}">Painel Administrativo</a>
+                                @endif
                             </div>
                         @endauth
 
